@@ -51,6 +51,16 @@ mongoClient.connect('mongodb://localhost:27017/', { useNewUrlParser: true, useUn
       }
     });
 
+    db.collection('employees').updateOne({ department: 'IT' }, { $set: { salary: 6000 }}, err => {
+      console.log('Update salary of the first matching employee from the IT Department:')
+      if(err) console.log(err);
+    });
+
+    db.collection('departments').deleteOne({ name: 'Management' }, (err) => {
+      console.log('Remove the Management from the Departmens collection:');
+      if(err) console.log(err);
+    });
+
     const app = express();
 
     app.use(cors());
