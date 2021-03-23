@@ -47,13 +47,13 @@ exports.addNew = async (req, res) => {
 exports.edit = async (req, res) => {
   const { name } = req.body;
   try {
-    await Department.findByIdAndUpdate({ _id: req.params.id }, { $set: { name: name } }, (err, doc) => {
-      if (err) {
-        res.status(404).json({ message: 'Not found...' });
-      } else {
-        res.json(doc);
-      }
-    });
+    const dep = await (Department.findById(req.params.id));
+    if (dep) {
+      dep.name = name;
+      await dep.save();
+      res.json(dep);
+    }
+    else res.status(404).json({ message: 'Not found...' });
   }
   catch (err) {
     res.status(500).json({ message: err });
