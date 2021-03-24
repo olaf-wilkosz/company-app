@@ -47,7 +47,7 @@ exports.addNew = async (req, res) => {
 exports.edit = async (req, res) => {
   const { name, client } = req.body;
   try {
-    const dep = await (Product.findById(req.params.id));
+    const dep = await Product.findById(req.params.id);
     if (dep) {
       await Product.updateOne({ _id: req.params.id }, { $set: { name: name, client: client } });
       res.json({ message: 'OK' });
@@ -61,7 +61,7 @@ exports.edit = async (req, res) => {
 
 exports.delete = async (req, res) => {
   try {
-    const dep = await (Product.findById(req.params.id));
+    const dep = await Product.findById(req.params.id);
     if (dep) {
       await Product.deleteOne({ _id: req.params.id });
       res.json({ message: 'OK' });

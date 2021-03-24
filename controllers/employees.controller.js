@@ -47,7 +47,7 @@ exports.addNew = async (req, res) => {
 exports.edit = async (req, res) => {
   const { firstName, lastName, department } = req.body;
   try {
-    const dep = await (Employee.findById(req.params.id));
+    const dep = await Employee.findById(req.params.id);
     if (dep) {
       await Employee.updateOne({ _id: req.params.id }, { $set: { firstName: firstName, lastName: lastName, department: department } });
       res.json({ message: 'OK' });
@@ -61,7 +61,7 @@ exports.edit = async (req, res) => {
 
 exports.delete = async (req, res) => {
   try {
-    const dep = await (Employee.findById(req.params.id));
+    const dep = await Employee.findById(req.params.id);
     if (dep) {
       await Employee.deleteOne({ _id: req.params.id });
       res.json({ message: 'OK' });

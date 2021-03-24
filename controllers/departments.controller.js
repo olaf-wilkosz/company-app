@@ -47,7 +47,7 @@ exports.addNew = async (req, res) => {
 exports.edit = async (req, res) => {
   const { name } = req.body;
   try {
-    const dep = await (Department.findById(req.params.id));
+    const dep = await Department.findById(req.params.id);
     if (dep) {
       dep.name = name;
       await dep.save();
